@@ -3,7 +3,7 @@
 FASTLED_USING_NAMESPACE
 
 //led stuff
-#define DATA_PIN   27
+#define DATA_PIN   33
 //#define CLK_PIN   4
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
@@ -83,6 +83,7 @@ void setup() {
   // set master brightness control
   FastLED.setBrightness(BRIGHTNESS);
   // Create the BLE Device
+  initializeAudio();
  setupBLE();
   Serial.println("Waiting a client connection to notify...");
 int core = xPortGetCoreID();
@@ -99,7 +100,7 @@ void loop() {
   }
 
   if (deviceConnected) {
-
+ readAudio();
 
     // Fabricate some arbitrary junk for now...
     if (pattern == "rainbow") {
@@ -108,8 +109,21 @@ void loop() {
 
     }
     if (pattern=="printaudio"){
+      
+       print_audio();
+    }
+     if (pattern=="radiate"){
+      
+       radiate();
+    }
+     if (pattern=="flexmono"){
+      
+       flex_mono();
+    }
 
-      print_audio();
+      if (pattern=="spectrumWaves"){
+      
+      spectrumWaves();
     }
     if (pattern == "off") {
 //      FastLED.show();

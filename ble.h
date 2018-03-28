@@ -97,6 +97,8 @@ class MyCallbacks: public BLECharacteristicCallbacks {
       setPattern(pat);
 
     }
+
+    
      if (rxValue.find("printaudio") != -1) {
       Serial.println("Turning ON!");
         pat = "printaudio";

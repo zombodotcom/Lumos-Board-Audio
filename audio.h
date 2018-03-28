@@ -20,9 +20,9 @@
 // https://github.com/macetech/RGBShadesAudio
 
 // Pin definitions
-#define MSGEQ7_AUDIO_PIN 26 
-#define MSGEQ7_STROBE_PIN 25 
-#define MSGEQ7_RESET_PIN  33 
+#include <driver/adc.h>
+#define MSGEQ7_STROBE_PIN 26 
+#define MSGEQ7_RESET_PIN  25
 
 #define AUDIODELAY 0
 
@@ -42,7 +42,7 @@ float spectrumDecay[7] = {0};   // holds time-averaged values
 float spectrumPeaks[7] = {0};   // holds peak values
 float audioAvg = 270.0;
 float gainAGC = 0.0;
-
+int read_raw;
 uint8_t spectrumByte[7];        // holds 8-bit adjusted adc values
 
 uint8_t spectrumAvg;
@@ -51,7 +51,7 @@ unsigned long currentMillis; // store current loop's millis value
 unsigned long audioMillis; // store time of last audio update
 
 void initializeAudio() {
-  pinMode(MSGEQ7_AUDIO_PIN, INPUT);
+ 
   pinMode(MSGEQ7_RESET_PIN, OUTPUT);
   pinMode(MSGEQ7_STROBE_PIN, OUTPUT);
 
@@ -61,7 +61,9 @@ void initializeAudio() {
 
 void readAudio() {
   static PROGMEM const byte spectrumFactors[7] = {9, 11, 13, 13, 12, 12, 13};
+    adc2_config_channel_atten( ADC2_CHANNEL_7, ADC_ATTEN_0db );
 
+    esp_err_t r = adc2_get_raw( ADC2_CHANNEL_7, ADC_WIDTH_12Bit, &read_raw);//AUDIO PIN IS PIN 27
   // reset MSGEQ7 to first frequency bin
   digitalWrite(MSGEQ7_RESET_PIN, HIGH);
   delayMicroseconds(5);
@@ -78,7 +80,8 @@ void readAudio() {
     delayMicroseconds(50); // to allow the output to settle
 
     // read the analog value
-    spectrumValue[i] = analogRead(MSGEQ7_AUDIO_PIN);
+    
+    spectrumValue[i] = read_raw;
     digitalWrite(MSGEQ7_STROBE_PIN, HIGH);
 
     // noise floor filter
@@ -471,4 +474,5 @@ void rain() {
   }
 
 }
+
 

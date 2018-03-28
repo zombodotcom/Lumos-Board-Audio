@@ -29,7 +29,6 @@ void juggle() {
 }
 void pride()
 {
-
   static uint16_t sPseudotime = 0;
   static uint16_t sLastMillis = 0;
   static uint16_t sHue16 = 0;
@@ -68,6 +67,4 @@ void pride()
     nblend( leds[pixelnumber], newcolor, 64);
   }
 }
-
-
 
