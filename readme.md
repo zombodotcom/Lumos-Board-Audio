@@ -9,7 +9,7 @@ esp_err_t r = adc2_get_raw( ADC2_CHANNEL_7, ADC_WIDTH_12Bit, &read_raw);//AUDIO 
 
 [esp32 pinout](https://1.bp.blogspot.com/-RL8tkZprmjc/WMxXKaIgocI/AAAAAAAAALw/xLM5Qt3jgSALQ_hHRaurJswgGK5G4wVxwCLcB/s1600/myESP32%2BDevKitC%2Bpinout.png)
 
-[String Splitter Library] (https://github.com/aharshac/StringSplitter)  
+[String Splitter Library](https://github.com/aharshac/StringSplitter)  
 
 Also make sure you have the clockless ESP32 FastLED file. 
 
