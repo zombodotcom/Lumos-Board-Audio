@@ -13,4 +13,4 @@ esp_err_t r = adc2_get_raw( ADC2_CHANNEL_7, ADC_WIDTH_12Bit, &read_raw);//AUDIO 
 
 Also make sure you have the clockless ESP32 FastLED file. 
 
-[like all the files from here, for esp32 arduino, this is a branch working with esp32](https://github.com/samguyer/FastLED/tree/master/platforms/esp/32)
+[esp32 clockless Fastled Branch](https://github.com/samguyer/FastLED/tree/master/platforms/esp/32)
